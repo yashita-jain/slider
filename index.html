@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+</head>
+<style> 
+/* Events */
+body{
+    background-color: black;
+}
+    .event{margin-top: 2rem;
+      margin-bottom: 8rem;
+          display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.856);
+  
+    }
+  
+    #eventhead{
+        margin: 40px;
+        color: white; 
+        font-size: 4rem;
+        margin-bottom: 0;
+       }
+  
+    
+       #eventbody{
+        margin: 50px;
+    }
+  
+  
+    .carousel {box-sizing: border-box;
+      align-items: center;
+      display: flex;
+      margin: auto;
+      position: relative;
+      width: 50rem;
+      padding: 0;
+      overflow: hidden;
+      height:400px
+    }
+    
+    .card {
+      width: 50rem;
+      text-align: center;
+      border: 1px solid black;
+      box-sizing: border-box;
+      
+    }
+    
+    .images {
+      align-items: center;
+      display: flex;
+      transform: translateX(0);
+      transition: transform 0.25s;
+    }
+    
+    
+    .active {
+     z-index: 1;
+    }
+    
+   
+    .buttonspn {
+      background-color: black;
+      border: 0;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      font-size: 4rem;
+      font-weight: bold;
+      height: 3rem;
+      opacity: 0.4;
+      position: absolute;
+      transition: opacity 0.25s;
+      width: 3rem;
+      z-index: 1;
+    }
+    
+    #previous {
+      left: 0.3rem;
+    }
+    
+    #next {
+      right: 0.3rem;
+    }
+    
+    button:hover {
+      opacity: 0.5;
+    }
+    
+    #holdc {
+      width: 80%;
+      overflow: hidden;
+    }
+  
+    .card_container{
+     box-sizing: border-box;
+     display: flex;
+     height:250px;
+     width:250px;
+     margin: auto;
+     overflow: hidden;
+     transition: all 500ms ease-in;
+     transition-delay: 1s;
+     margin: auto;
+     margin-top: 100px;
+     margin-bottom: 100px;
+     --margin-top: 100px;
+    }
+    
+    .slider{
+        display: flex;
+    }
+    
+    .card_container:hover {
+      background:#EDECEC;;
+      height:250px;
+      width: 500px;
+      border-radius: 120px 10px 100px 120px;
+      transition: all 1s ease-out;
+    }
+    
+    .card_container div {
+         flex-shrink: 1;
+        }
+      
+    .card_container #textbox {
+         position: relative;
+       }
+    
+     #textbox{
+       padding: 1rem;
+     }   
+    
+    .card_container #main{
+     box-sizing: border-box;
+     width:250px;
+    
+    }
+    
+     .card_container #main img{
+     box-sizing: border-box;
+     border: 10px solid#EDECEC;
+     height:250px;
+     width: 250px;
+     border-radius: 100%;
+    }
+   
+    @media (max-width: 850px){
+     .card_container{
+         flex-direction: column;
+    }
+    .card_container:hover{
+     height:500px;
+     width: 250px;
+     border-radius: 120px 120px 10px 100px;
+     transition: all 1s ease-out;
+    }
+    
+    .card {width: 25rem;
+      text-align: center;
+      border: 1px solid black;
+      box-sizing: border-box;
+      
+    }
+  
+    .carousel {
+      width: 25rem;
+      height:600px;
+      margin-top: 2rem;
+    }
+    }
+  
+  
+    
+   </style>
+<body>
+    <div class="event">
+        <div id="eventhead">Events</div>
+        <div class="carousel">  
+            <button class="buttonspn" id="previous"> < </button>
+               <div class="images">
+                 <div class="card">                
+                   <div class="card_container">
+                     <div id="main"><img src="/assets/cat1.png"></img></div>
+                     <div id="textbox">
+                       <h2>Podcast</h2>
+                       <h4>Lorem ipsum dolor sit<br> amet consectetur adipisi<br> elit. Delectus, vitae!</h4>
+                     </div> 
+                   </div>
+                 </div>
+                 <div class="card">                
+                   <div class="card_container">
+                     <div id="main"><img src="assets/cat2.jpeg"></img></div>
+                     <div id="textbox">
+                       <h2>Podcast</h2>
+                       <h4>Lorem ipsum dolor sit<br> amet consectetur adipisi<br> elit. Delectus, vitae!</h4>
+                     </div> 
+                   </div>
+                 </div>
+                 <div class="card">                
+                   <div class="card_container">
+                     <div id="main"><img src="assets/cat3.jpg"></img></div>
+                     <div id="textbox">
+                       <h2>Podcast</h2>
+                       <h4>Lorem ipsum dolor sit<br> amet consectetur adipisi<br> elit. Delectus, vitae!</h4>
+                     </div> 
+                   </div>
+                 </div>
+               </div>
+             <button class="buttonspn" id="next">></button>
+           </div>
+       </div>
+
+</body>
+<script>
+const carouselImages = document.querySelector('.images');
+const images = document.querySelectorAll('.images img');
+const carouselButtons = document.querySelectorAll('.carousel button');
+const numberOfImages = document.querySelectorAll('.images img').length;
+let imageIndex = 1;
+let translateX = 0;
+
+
+carouselButtons.forEach(button => {
+  button.addEventListener('click', (event) => {
+    if (event.target.id === 'previous') {
+      if (imageIndex !== 1) {
+        imageIndex--;
+        translateX +=33.2;
+       
+      }
+    } else {
+      if (imageIndex !== numberOfImages) {
+        imageIndex++;
+        translateX -= 33.2;
+      }
+    }
+
+    carouselImages.style.transform = `translateX(${translateX}%)`;
+    images.forEach((image, index) => {
+      if (index === imageIndex - 1) {
+        image.classList.add('active');
+      } else {
+        image.classList.remove('active');
+      }
+    });
+  });
+});
+
+</script>
+</html>
